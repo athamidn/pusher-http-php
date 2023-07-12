@@ -531,7 +531,8 @@ class Pusher implements LoggerAwareInterface, PusherInterface
         $response = $this->exec_curl($ch);
 
         if ($response['status'] !== 200) {
-            Log::info('pusher_ in khata oftad' , ['response' => $response ,'prefix' => $this->channels_url_prefix(), 'path' => $path, 'queParam' => $query_params ]);
+            $er = curl_error($ch);
+            Log::info('pusher_ in khata oftad' , ['response' => $response ,'prefix' => $this->channels_url_prefix(), 'path' => $path, 'queParam' => $query_params ,' $er' => $er,'param' =>$all_params ]);
             throw new ApiErrorException($response['body'], $response['status']);
         }
 
